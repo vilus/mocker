@@ -25,8 +25,11 @@ class Lock(Model):
 
 class MockQuerySet(QuerySet):
 
+    def not_expired(self):
+        return self.filter(expired__gt=timezone.now())
+
     def overlapped(self, host, route, method):
-        qs = self.filter(expired__gt=timezone.now())
+        qs = self.not_expired()
 
         if host != ANY:
             qs = qs.filter(host__in=(host, ANY))
@@ -44,6 +47,17 @@ class MockQuerySet(QuerySet):
 
     def by_response(self, responses, response_type):
         return self.filter(response_type=response_type, responses=responses)
+
+    def get_by(self, host, route, method):
+        matched_mocks = self.not_expired().filter(
+            host__in=(host, ANY), route__in=(route, ANY), method__in=(method, ANY)
+        ).order_by('responses').distinct('responses')
+
+        if matched_mocks.count() > 1:
+            raise DupError('Can\'t determine mock, '
+                           f'matched ones has different responses: {list(matched_mocks[:10])}')
+
+        return matched_mocks.first()
 
     @transaction.atomic
     def create(self, route, method, responses, name=ANY, ttl=TTL, host=ANY, response_type=SEQUENCE, is_exclusive=False):  # TODO: hardcode
