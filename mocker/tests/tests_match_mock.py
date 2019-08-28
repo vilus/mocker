@@ -54,7 +54,7 @@ def test_match_similar_mock():
 
     assert Mock.objects.get_by(host='qwer.ty', route='/qwerty', method='GET').responses == 'resp 42'
     assert Mock.objects.get_by(host='qwer.ty', route='/42', method='PUT').responses == 'resp 42'
-    assert Mock.objects.get_by(host='qwer.ty', route='/42', method='CONNECT').responses == 'resp 42'
+    assert Mock.objects.get_by(host='qwer.ty', route='/piy', method='CONNECT').responses == 'resp 42'
 
 
 def test_match_similar_with_different_responses_mock():
