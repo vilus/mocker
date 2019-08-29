@@ -67,7 +67,6 @@ class MockQuerySet(QuerySet):
 
     @transaction.atomic
     def create(self, route, method, responses, name=ANY, ttl=TTL, host=ANY, response_type=SINGLE, is_exclusive=False):
-        # TODO: add validators for type of responses
         Lock.objects.select_for_update().get_or_create(name='Mock')
 
         overlapped = self.overlapped(host, route, method).not_by_response(responses, response_type)
