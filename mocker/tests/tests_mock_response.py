@@ -22,26 +22,31 @@ def test_single_dict_response():
     assert mock.get_response() == expected_resp
 
 
-# --- TODO: move to one parametrized test ---
-@pytest.mark.parametrize('response_type', [SEQUENCE, CYCLE])
-def test_array_with_single_dict_response(response_type):
-    mock = Mock.objects.create(host='some.any', route='/', method='POST', response_type=response_type,
-                               responses=[{'body': 42, 'return_code': 204}])
-    expected_resp = {'body': 42, 'return_code': 204, 'headers': {'Content-Type': 'text/html; charset=utf-8'}}
-
+@pytest.mark.parametrize(
+    'response_type,responses,expected_resp', [
+        (
+            SEQUENCE, [{'body': 42, 'return_code': 204}],
+            {'body': 42, 'return_code': 204, 'headers': {'Content-Type': 'text/html; charset=utf-8'}}
+        ),
+        (
+            CYCLE, [{'body': 42, 'return_code': 204}],
+            {'body': 42, 'return_code': 204, 'headers': {'Content-Type': 'text/html; charset=utf-8'}}
+        ),
+        (
+            SEQUENCE, [42],
+            {'body': 42, 'return_code': 200, 'headers': {'Content-Type': 'text/html; charset=utf-8'}}
+        ),
+        (
+            CYCLE, [42],
+            {'body': 42, 'return_code': 200, 'headers': {'Content-Type': 'text/html; charset=utf-8'}}
+        ),
+    ]
+)
+def test_array_with_single_response(response_type, responses, expected_resp):
+    mock = Mock.objects.create(host='some.any', route='/', method='POST',
+                               response_type=response_type, responses=responses)
     assert mock.get_response() == expected_resp
     assert mock.get_response() == expected_resp
-
-
-@pytest.mark.parametrize('response_type', [SEQUENCE, CYCLE])
-def test_array_with_single_string_response(response_type):
-    mock = Mock.objects.create(host='some.any', route='/', method='POST', response_type=response_type,
-                               responses=[42])
-    expected_resp = {'body': 42, 'return_code': 200, 'headers': {'Content-Type': 'text/html; charset=utf-8'}}
-
-    assert mock.get_response() == expected_resp
-    assert mock.get_response() == expected_resp
-# ---
 
 
 def test_sequence_response():
