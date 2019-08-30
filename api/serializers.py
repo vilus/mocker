@@ -7,4 +7,8 @@ class MockSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Mock
         fields = '__all__'
-        # editable = False  # TODO: make read-only
+        extra_kwargs = {
+            'route': {'required': True},
+            'method': {'required': True},
+            'responses': {'required': True},
+        }
