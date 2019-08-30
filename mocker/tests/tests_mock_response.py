@@ -82,4 +82,3 @@ def test_cycle_response():
     assert mock.get_response() == expected_resp_1
     assert mock.get_response() == expected_resp_2
     assert mock.get_response() == expected_resp_3
-
