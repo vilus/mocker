@@ -1,4 +1,5 @@
 import pytest
+
 from mocker.models import Mock, SINGLE, SEQUENCE, CYCLE
 
 

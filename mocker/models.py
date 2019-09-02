@@ -56,7 +56,7 @@ class MockQuerySet(QuerySet):
 
     def get_by(self, host, route, method):
         matched_mocks = self.not_expired().filter(
-            host__in=(host, ANY), route__in=(route, ANY), method__in=(method, ANY)
+            host__in=(host, ANY), route__in=(route, ANY), method__in=(method, ANY, method.lower())
         ).order_by('responses').distinct('responses')
 
         if matched_mocks.count() > 1:
