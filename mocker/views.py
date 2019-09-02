@@ -1,9 +1,10 @@
 from django.http import HttpResponse, Http404
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Mock
 
 
-# TODO: exept csrf
+@csrf_exempt
 def matcher(request):
     mock = Mock.objects.get_by(host=request.get_host(), route=request.path, method=request.method)
 
