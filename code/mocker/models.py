@@ -134,13 +134,13 @@ class ResponseIterator(Model):
 
     @staticmethod
     def from_simple(resp):
-        res = {'body': resp}
+        res = {'body': resp}  # TODO: collection.ChainMap
         res.update(RESPONSE_DEFAULT)
         return res
 
     @staticmethod
     def from_dict(resp):
-        res = copy.deepcopy(RESPONSE_DEFAULT)
+        res = copy.deepcopy(RESPONSE_DEFAULT)  # TODO: collection.ChainMap
         res.update(resp)
         return res
 

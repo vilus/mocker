@@ -20,7 +20,7 @@ About mock:
   - single (default): `A` -> `A` `A` `A`,
   - sequence: [`A`, `B`, `C`] -> `A` `B` `C` `C` `C` ...
   - cycle: [`A`, `B`, `C`] -> `A` `B` `C` `A` `B` `C` ...
-- can be exclusive (no other similar mocks might be created)
+- can be exclusive (no other similar mocks might be created, False by default)
 
 Mock deleted via http DELETE request to `/mocker_api/mocks/<pk>/`
 (response has json with key `is_expired`)
@@ -30,7 +30,7 @@ Mocks CRUD also available via browser (Django REST framework builtin UI)
 Examples:
 - create mocks:
 ```bash
-curl -H "Content-Type: application/json" -X POST -d '{"method":"GET","route":"/42","responses":42}' srv:8080/mocker_api/mocks/
+curl -H "Content-Type: application/json" -X POST -d '{"method":"GET","route":"/42","responses":42, "is_exclusive": true}' srv:8080/mocker_api/mocks/
 {"url":"http://srv:8080/mocker_api/mocks/2/","name":"*","created":"2019-09-03T11:16:04.161986Z","expired":"2019-09-03T11:18:04.161853Z","ttl":120,"is_exclusive":false,"host":"*","route":"/42","method":"GET","responses":42,"response_type":"single"}
 ```
 
