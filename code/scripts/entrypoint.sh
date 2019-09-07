@@ -2,10 +2,10 @@
 
 echo "waiting for DB "
 
-while ! python manage.py migrate
+while ! python manage.py migrate --noinput
 do
   echo -n .
-  sleep 4
+  sleep 1
 done
 
 exec "$@"

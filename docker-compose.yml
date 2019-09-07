@@ -2,9 +2,12 @@ version: '3'
 
 services:
   srv:
-    build: .
+    build:
+      context: .
+      args:
+        - DJANGO_STATIC_ROOT=/static_files
     image: 'mocker'
-    command: python manage.py runserver 0.0.0.0:8080
+    command: python manage.py runserver --nostatic 0.0.0.0:8080
     env_file:
       - '.env'
     volumes:
