@@ -5,6 +5,8 @@ ENV PYTHONUNBUFFERED 1
 ARG DJANGO_STATIC_ROOT
 ENV DJANGO_STATIC_ROOT ${DJANGO_STATIC_ROOT:-/static_files_default}
 
+EXPOSE 8080
+
 RUN mkdir /code
 WORKDIR /code
 COPY requirements.txt ./
@@ -17,4 +19,4 @@ RUN python manage.py collectstatic --noinput
 
 ENTRYPOINT ["./scripts/entrypoint.sh"]
 
-CMD ["python", "manage.py", "runserver", "--nostatic", "0.0.0.0:8080"]
+CMD ["gunicorn", "project.wsgi:application", "-w", "2", "-b", ":8080", "--error-logfile", "-", "--access-logfile", "-"]
