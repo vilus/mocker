@@ -1,5 +1,7 @@
 # http mock server
 
+[![Build Status](https://travis-ci.org/vilus/mocker.svg?branch=master)](https://travis-ci.org/vilus/mocker)
+
 Returns http responses by matching requests.
 
 Request matching defined by: `host` `method` `path` (its can be any - `*`)
