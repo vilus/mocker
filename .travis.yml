@@ -12,3 +12,9 @@ before_script:
 
 script:
   - docker-compose run --rm --no-deps --entrypoint "" srv pytest
+
+deploy:
+  provider: script
+  script: bash .travis/docker_push.sh
+  on:
+    branch: master
