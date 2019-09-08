@@ -6,9 +6,9 @@ echo "waiting for DB "
 attempt=1
 while ! python manage.py migrate --noinput
 do
-  if [ $attempt -le 15 ]
+  if [ $attempt -gt 15 ]
   then
-    break
+    exit 1
   fi
   attempt=$(( $attempt + 1 ))
 

@@ -4,11 +4,8 @@ services:
   srv:
     build: .
     image: 'mocker'
-    command: python manage.py runserver --nostatic 0.0.0.0:8080
     env_file:
       - '.env'
-    volumes:
-      - './code:/code'
     ports:
       - '8080:8080'
     depends_on:
