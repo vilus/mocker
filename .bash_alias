@@ -1,5 +1,5 @@
 alias dcb='docker-compose build'
-alias dcu='docker-compose up -d'
+alias dcu='docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d'
 alias dcd='docker-compose down -v'
 alias dcp='docker-compose ps -a'
 alias dcmm='docker-compose run --rm --entrypoint "" srv python manage.py makemigrations'
