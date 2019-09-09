@@ -11,7 +11,8 @@ before_script:
   - docker-compose up -d
 
 script:
-  - docker-compose run --rm --no-deps --entrypoint "" srv pytest
+  - docker-compose exec srv ./scripts/entrypoint.sh pytest
+  - docker-compose exec srv codecov -t "$CODECOV_TOKEN" -c "$TRAVIS_COMMIT"
 
 deploy:
   provider: script
