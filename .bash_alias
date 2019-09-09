@@ -1,4 +1,4 @@
-alias dcb='docker-compose build'
+alias dcb='docker-compose -f docker-compose.yml -f docker-compose.dev.yml build'
 alias dcu='docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d'
 alias dcd='docker-compose down -v'
 alias dcp='docker-compose ps -a'

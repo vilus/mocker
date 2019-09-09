@@ -2,7 +2,6 @@ version: '3'
 
 services:
   srv:
-    build: .
     image: 'mocker'
     env_file:
       - '.env'

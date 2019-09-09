@@ -87,4 +87,10 @@ other examples in tests
 
 
 **Install**
-_TODO_
+
+for example via docker-compose:
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.stage.yml up -d
+docker-compose -f docker-compose.yml -f docker-compose.stage.yml run --rm --no-deps --entrypoint "" srv pytest
+```
+or any other way 
