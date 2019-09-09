@@ -1,6 +1,7 @@
 # http mock server
 
 [![Build Status](https://travis-ci.org/vilus/mocker.svg?branch=master)](https://travis-ci.org/vilus/mocker)
+[![codecov](https://codecov.io/gh/vilus/mocker/branch/master/graph/badge.svg)](https://codecov.io/gh/vilus/mocker)
 
 Returns http responses by matching requests.
 

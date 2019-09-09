@@ -26,7 +26,7 @@ class Lock(Model):
     name = models.CharField(max_length=16, primary_key=True)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name}'  # pragma: no cover
 
 
 class MockQuerySet(QuerySet):
@@ -150,7 +150,9 @@ class ResponseIterator(Model):
         return self.from_simple(resp)
 
     def next(self):
-        raise NotImplementedError(f'Unsupported type of responses {self.mock.response_type.__class__.__name__}')
+        raise NotImplementedError(
+            f'Unsupported type of responses {self.mock.response_type.__class__.__name__}'
+        )  # pragma: no cover
 
 
 class SingleResponseIterator(ResponseIterator):
@@ -166,7 +168,7 @@ class ArrayResponseIterator(ResponseIterator):
 
     @classmethod
     def get_and_update_index(cls, instance, responses_len):
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     def next(self):
         responses = self.mock.responses

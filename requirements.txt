@@ -5,3 +5,5 @@ pytest-django
 djangorestframework
 whitenoise
 gunicorn
+pytest-cov
+codecov
