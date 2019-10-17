@@ -134,13 +134,13 @@ class ResponseIterator(Model):
 
     @staticmethod
     def from_simple(resp):
-        res = {'body': resp}  # TODO: collection.ChainMap
+        res = {'body': resp}
         res.update(RESPONSE_DEFAULT)
         return res
 
     @staticmethod
     def from_dict(resp):
-        res = copy.deepcopy(RESPONSE_DEFAULT)  # TODO: collection.ChainMap
+        res = copy.deepcopy(RESPONSE_DEFAULT)
         res.update(resp)
         return res
 
@@ -216,7 +216,7 @@ class CycleResponseIterator(ArrayResponseIterator):
         resp_iter = cls.objects.select_for_update().get(pk=instance)
         index = resp_iter.index
 
-        resp_iter.index = index+1 if index < responses_len - 1 else 0
+        resp_iter.index = index + 1 if index < responses_len - 1 else 0
         resp_iter.save()
 
         return index

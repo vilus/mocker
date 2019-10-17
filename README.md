@@ -84,6 +84,12 @@ curl -X DELETE srv:8080/mocker_api/mocks/3/
 {"is_expired":false}
 ```
 
+also available bulk creation of mocks:
+```bash
+curl -H "Content-Type: application/json" -X POST -d '[{"method":"GET","route":"/42","responses":42, "is_exclusive": true}, {"method":"GET","route":"/42_2","responses":42, "is_exclusive": true}]' srv:8080/mocker_api/mocks/
+[{"url":"http://srv:8080/mocker_api/mocks/2/","name":"*","created":"2019-10-17T09:58:46.007125Z","expired":"2019-10-17T10:00:46.007010Z","ttl":120,"is_exclusive":true,"host":"*","route":"/42","method":"GET","responses":42,"response_type":"single"},{"url":"http://srv:8080/mocker_api/mocks/3/","name":"*","created":"2019-10-17T09:58:46.010781Z","expired":"2019-10-17T10:00:46.010677Z","ttl":120,"is_exclusive":true,"host":"*","route":"/42_2","method":"GET","responses":42,"response_type":"single"}]
+```
+
 other examples in tests
 
 
@@ -94,4 +100,4 @@ for example via docker-compose:
 docker-compose -f docker-compose.yml -f docker-compose.stage.yml up -d
 docker-compose -f docker-compose.yml -f docker-compose.stage.yml run --rm --no-deps --entrypoint "" srv pytest
 ```
-or any other way 
+or any other way
