@@ -52,7 +52,7 @@ qwerty
 ```
 
 ```bash
-curl -i -X GET srv:8080/
+curl -i -X GET srv:8080/42
 HTTP/1.1 200 OK
 Content-Type: text/html; charset=utf-8
 
